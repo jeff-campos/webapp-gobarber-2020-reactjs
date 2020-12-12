@@ -7,6 +7,7 @@ export const Container = styled.div`
   display: flex;
   align-items: stretch;
 `;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,35 +24,6 @@ export const Content = styled.div`
 
     h1 {
       margin-bottom: 24px;
-    }
-
-    input {
-      background: #232129;
-      border-radius: 10px;
-      border: 2px solid #232129;
-      color: #f4ede8;
-      padding: 16px;
-      width: 100%;
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      background: #ff9000;
-      height: 56px;
-      border-radius: 10px;
-      border: 0;
-      padding: 0 16px;
-      color: #312e38;
-      width: 100%;
-      font-weight: 500;
-      margin-top: 16px;
-      transition: background 0.2s;
-      &:hover {
-        background: ${shade(0.2, '#ff9000')};
-      }
     }
 
     > a {
@@ -84,6 +56,7 @@ export const Content = styled.div`
     }
   }
 `;
+
 export const Background = styled.div`
   flex: 1;
   background: url(${signInBackgroundImg}) no-repeat top center;

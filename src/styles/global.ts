@@ -14,6 +14,7 @@ body {
 }
 
 body, input, button {
+  font-family: 'Roboto Slab', serif;
   background: #312E38;
   color: #FFF;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +22,10 @@ body, input, button {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 500
+}
+
+button {
+  cursor: pointer;
 }
 
 `;
