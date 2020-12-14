@@ -1,9 +1,11 @@
 import React from 'react';
 import GlobalStyles from './styles/global';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 const App: React.FC = () => (
   <>
-    <h1>Hello Word !</h1>
+    <SignIn />
     <GlobalStyles />
   </>
 );
