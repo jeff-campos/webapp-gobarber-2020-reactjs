@@ -8,6 +8,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationError from '../../utils/getValidationErrors';
 import { useAuth } from '../../context/AuthContex';
+import { useToast } from '../../context/ToastContext';
 import { Container, Content, Background } from './styles';
 
 interface SignInProps {
@@ -17,6 +18,7 @@ interface SignInProps {
 
 const SingIn: React.FC = () => {
   const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const formRef = useRef<FormHandles>(null);
 
@@ -36,16 +38,24 @@ const SingIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
       } catch (err) {
-        const errors = getValidationError(err);
-        formRef.current?.setErrors(errors);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationError(err);
+          formRef.current?.setErrors(errors);
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description: 'Ocorreu um erro ao fazer login, cheque as crendênciais',
+        });
       }
     },
-    [signIn],
+    [signIn, addToast],
   );
 
   return (
