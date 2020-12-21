@@ -9,33 +9,42 @@ import { ToastMessage, useToast } from '../../../context/ToastContext';
 
 import { Container } from './styles';
 
+interface ToastMessageProps {
+  message: ToastMessage;
+  style: any;
+}
+
 const icons = {
   info: <FiInfo size={20} />,
   error: <FiAlertCircle size={20} />,
   success: <FiCheckCircle size={20} />,
 };
-const Toast: React.FC<ToastMessage> = ({ id, title, type, description }) => {
+const Toast: React.FC<ToastMessageProps> = ({ message, style }) => {
   const { removeToast } = useToast();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      removeToast(id);
+      removeToast(message.id);
     }, 3000);
 
     return () => {
       clearTimeout(timer);
     };
-  }, [removeToast, id]);
+  }, [removeToast, message.id]);
 
   return (
-    <Container type={type} hasDescription={!!description}>
-      {icons[type || 'info']}
+    <Container
+      type={message.type}
+      hasDescription={!!message.description}
+      style={style}
+    >
+      {icons[message.type || 'info']}
       <div>
-        <strong>{title}</strong>
-        {description && <p>{description}</p>}
+        <strong>{message.title}</strong>
+        {message.description && <p>{message.description}</p>}
       </div>
 
-      <button type="button" onClick={() => removeToast(id)}>
+      <button type="button" onClick={() => removeToast(message.id)}>
         <FiXCircle size={18} />
       </button>
     </Container>
